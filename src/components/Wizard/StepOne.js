@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
-import {Redirect} from 'react-router'
+import { Redirect } from 'react-router'
 
-class Wizard extends Component{
-    constructor(){
+class StepOne extends Component {
+    constructor() {
         super()
         this.state = {
-            name:'',
-            address:'',
-            city:'',
-            state:'',
+            name: '',
+            address: '',
+            city: '',
+            state: '',
             zipcode: 0,
             redirect: false
 
@@ -24,24 +24,24 @@ class Wizard extends Component{
     handleZipcode(value) {
         this.setState({ zipcode: +value })
     }
-    createHouse(){
-        const {name, address, city, state, zipcode} = this.state
-        
-        axios.post('/api/createhouse', {name, address, city, state, zipcode})
-            .then(() => this.setState({redirect: true}))
-        
+    createHouse() {
+        const { name, address, city, state, zipcode } = this.state
+
+        axios.post('/api/createhouse', { name, address, city, state, zipcode })
+            .then(() => this.setState({ redirect: true }))
+
 
     }
 
 
 
-    render(){
+    render() {
         console.log('current state', this.state)
-        const {redirect} = this.state
+        const { redirect } = this.state
         if (redirect) {
-            return <Redirect to='/'/>
+            return <Redirect to='/' />
         }
-        return(
+        return (
             <div>
                 Wizard
                 <div>
@@ -50,15 +50,15 @@ class Wizard extends Component{
                     City: <input value={this.state.city} onChange={(e) => this.handleChange("city", e.target.value)} type="text" />
                     State: <input value={this.state.state} onChange={(e) => this.handleChange("state", e.target.value)} type="text" />
                     Zipcode: <input value={this.state.zipcode} onChange={(e) => this.handleZipcode(e.target.value)} />
-                    
+
                     <button onClick={this.createHouse}>Complete</button>
                 </div>
 
-                
-                <Link to='/'><button>Cancel</button> </Link>
+
+               
             </div>
         )
     }
 }
 
-export default Wizard
+export default StepOne

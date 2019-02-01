@@ -24,7 +24,8 @@ class Dashboard extends Component{
             .then((res) => {
                 console.log(res)
             })
-        this.getAllHouses()
+
+        
     }
     componentDidMount() {
         this.getAllHouses()
@@ -46,7 +47,7 @@ class Dashboard extends Component{
     
     return(
             <div>
-                
+                {this.getAllHouses}
                 Dashboard
                 <Link to='/wizard'><button className='btn'>Add New Property</button></Link>
                 {housesList}
