@@ -49,7 +49,7 @@ class Dashboard extends Component{
             <div>
                 {this.getAllHouses}
                 Dashboard
-                <Link to='/wizard'><button className='btn'>Add New Property</button></Link>
+                <Link to='/wizard/step1'><button>Add New Property</button></Link>
                 {housesList}
             </div>
 

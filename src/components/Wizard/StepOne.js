@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios'
-import { Redirect } from 'react-router'
+import {connect} from 'react-redux'
+import { updateName } from '../../ducks/reducer'
+import { updateAddress } from '../../ducks/reducer'
+import { updateCity } from '../../ducks/reducer'
+import { updateStateN } from '../../ducks/reducer'
+import { updateZip } from '../../ducks/reducer'
+
 
 class StepOne extends Component {
     constructor() {
@@ -10,12 +15,12 @@ class StepOne extends Component {
             name: '',
             address: '',
             city: '',
-            state: '',
+            stateN: '',
             zipcode: 0,
-            redirect: false
+            
 
         }
-        this.createHouse = this.createHouse.bind(this)
+        
     }
 
     handleChange(field, value) {
@@ -24,26 +29,16 @@ class StepOne extends Component {
     handleZipcode(value) {
         this.setState({ zipcode: +value })
     }
-    createHouse() {
-        const { name, address, city, state, zipcode } = this.state
-
-        axios.post('/api/createhouse', { name, address, city, state, zipcode })
-            .then(() => this.setState({ redirect: true }))
-
-
-    }
+    
 
 
 
     render() {
-        console.log('current state', this.state)
-        const { redirect } = this.state
-        if (redirect) {
-            return <Redirect to='/' />
-        }
+        console.log('Props', this.props)
+        
         return (
             <div>
-                Wizard
+                Wizard Step1
                 <div>
                     Name: <input value={this.state.name} onChange={(e) => this.handleChange("name", e.target.value)} type="text" />
                     Address: <input value={this.state.address} onChange={(e) => this.handleChange("address", e.target.value)} type="text" />
@@ -51,14 +46,36 @@ class StepOne extends Component {
                     State: <input value={this.state.state} onChange={(e) => this.handleChange("state", e.target.value)} type="text" />
                     Zipcode: <input value={this.state.zipcode} onChange={(e) => this.handleZipcode(e.target.value)} />
 
-                    <button onClick={this.createHouse}>Complete</button>
+                    
                 </div>
+                <nav>
+
+                    
+                    <div>
+                        <Link to='/wizard/step2'><button onClick={(e) => {this.props.updateAddress(e.target.value); this.props.updateCity(e.target.value); this.props.updateStateN(e.target.value); this.props.updateZip(e.target.value);}}>Next Step</button></Link>
+                        
+
+                    </div>
+                </nav>
 
 
                
             </div>
         )
+        
     }
 }
 
-export default StepOne
+function mapStateToProps(state) {
+    const { name, address, city, stateN, zip } = state;
+
+    return {
+        name,
+        address,
+        city,
+        stateN,
+        zip
+    };
+}
+
+export default connect(mapStateToProps, { updateName, updateAddress, updateCity, updateStateN, updateZip})(StepOne)

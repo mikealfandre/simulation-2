@@ -5,14 +5,14 @@ import {HashRouter} from 'react-router-dom'
 import routes from './routes'
 import Header from './components/Header/Header'
 import {Provider} from 'react-redux'
-import store from './store'
+import store from './ducks/store'
 
 class App extends Component {
   render() {
     return (
       
-    // <Provider store={store} >
-
+    <Provider store={store}>
+    
       <HashRouter>
         <div>
                 <nav>
@@ -28,9 +28,13 @@ class App extends Component {
         </div>
 
       </HashRouter>
+    
+    
+    </Provider>
 
 
-    // </Provider>
+
+   
       
       
     );
