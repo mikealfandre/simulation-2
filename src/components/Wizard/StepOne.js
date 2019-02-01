@@ -8,9 +8,11 @@ import { updateStateN } from '../../ducks/reducer'
 import { updateZip } from '../../ducks/reducer'
 
 
+
 class StepOne extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
+        
         this.state = {
             name: '',
             address: '',
@@ -30,11 +32,13 @@ class StepOne extends Component {
         this.setState({ zipcode: +value })
     }
     
+    
 
 
 
     render() {
-        console.log('Props', this.props)
+        console.log('Props', this.props.name)
+        console.log('State', this.state)
         
         return (
             <div>
@@ -52,7 +56,7 @@ class StepOne extends Component {
 
                     
                     <div>
-                        <Link to='/wizard/step2'><button onClick={(e) => {this.props.updateAddress(e.target.value); this.props.updateCity(e.target.value); this.props.updateStateN(e.target.value); this.props.updateZip(e.target.value);}}>Next Step</button></Link>
+                        <Link to='/wizard/step2'><button onClick={(e) => { this.props.updateName(this.state.name); this.props.updateAddress(e.target.value); this.props.updateCity(e.target.value); this.props.updateStateN(e.target.value); this.props.updateZip(e.target.value);}}>Next Step</button></Link>
                         
 
                     </div>
@@ -77,5 +81,6 @@ function mapStateToProps(state) {
         zip
     };
 }
+
 
 export default connect(mapStateToProps, { updateName, updateAddress, updateCity, updateStateN, updateZip})(StepOne)

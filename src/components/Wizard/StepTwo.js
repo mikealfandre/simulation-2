@@ -10,7 +10,7 @@ class StepTwo extends Component {
         super()
         this.state = {
             img: '',
-            redirect: false
+            
 
         }
         
@@ -27,11 +27,12 @@ class StepTwo extends Component {
 
     render() {
 
-        
+     
+     
         
         return (
             <div>
-                Wizard Step 2
+                Wizard Step 2 
                 <div>
                     Image URL: <input value={this.state.img} onChange={(e) => this.handleChange("img", e.target.value)} type="text" />
                 </div>
