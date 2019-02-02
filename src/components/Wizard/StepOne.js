@@ -18,18 +18,30 @@ class StepOne extends Component {
             address: '',
             city: '',
             stateN: '',
-            zipcode: 0,
+            zip: 0,
             
 
         }
         
+    }
+    componentDidMount(){
+        const {name, address, city, stateN, zip} = this.props
+        this.setState({
+            name,
+            address,
+            city,
+            stateN,
+            zip
+
+        })
+
     }
 
     handleChange(field, value) {
         this.setState({ [`${field}`]: value })
     }
     handleZipcode(value) {
-        this.setState({ zipcode: +value })
+        this.setState({ zip: value })
     }
     
     
@@ -37,7 +49,7 @@ class StepOne extends Component {
 
 
     render() {
-        console.log('Props', this.props.name)
+        console.log('Props', this.props)
         console.log('State', this.state)
         
         return (
@@ -48,7 +60,7 @@ class StepOne extends Component {
                     Address: <input value={this.state.address} onChange={(e) => this.handleChange("address", e.target.value)} type="text" />
                     City: <input value={this.state.city} onChange={(e) => this.handleChange("city", e.target.value)} type="text" />
                     State: <input value={this.state.state} onChange={(e) => this.handleChange("state", e.target.value)} type="text" />
-                    Zipcode: <input value={this.state.zipcode} onChange={(e) => this.handleZipcode(e.target.value)} />
+                    Zipcode: <input value={this.state.zip} onChange={(e) => this.handleZipcode(e.target.value)} />
 
                     
                 </div>
@@ -56,7 +68,7 @@ class StepOne extends Component {
 
                     
                     <div>
-                        <Link to='/wizard/step2'><button onClick={(e) => { this.props.updateName(this.state.name); this.props.updateAddress(e.target.value); this.props.updateCity(e.target.value); this.props.updateStateN(e.target.value); this.props.updateZip(e.target.value);}}>Next Step</button></Link>
+                        <Link to='/wizard/step2'><button onClick={(e) => { this.props.updateName(this.state.name); this.props.updateAddress(this.state.address); this.props.updateCity(this.state.city); this.props.updateStateN(this.state.stateN); this.props.updateZip(this.state.zip);}}>Next Step</button></Link>
                         
 
                     </div>

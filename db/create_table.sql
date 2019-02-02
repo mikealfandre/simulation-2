@@ -3,7 +3,7 @@ create table if not exists houses(
     name varchar(30),
     address varchar(100),
     city varchar(100),
-    state varchar(2),
+    stateN varchar(2),
     zip integer,
     img text,
     mortgage decimal,

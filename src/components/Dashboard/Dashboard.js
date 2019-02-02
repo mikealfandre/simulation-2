@@ -39,7 +39,7 @@ class Dashboard extends Component{
             return (
 
                 <div>
-                    <House key={index} name={house.name} address={house.address} city={house.city} state={house.state} id={house.house_id} deleteHouseFN={this.deleteHouse} />
+                    <House key={index} name={house.name} address={house.address} city={house.city} state={house.state} zip={house.zip} img={house.img} mortgage={house.mortgage} rent={house.rent} id={house.house_id} deleteHouseFN={this.deleteHouse} />
                 </div>
 
             )

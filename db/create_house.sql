@@ -2,7 +2,7 @@ insert into houses(
     name,
     address,
     city,
-    state,
+    stateN,
     zip,
     img,
     mortgage,

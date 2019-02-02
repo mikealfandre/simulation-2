@@ -9,13 +9,13 @@ import { updateRent } from '../../ducks/reducer'
 class StepThree extends Component {
     constructor(props) {
         super(props)
-        const {name} = props;
+        
         this.state = {
-            name,
-            address: props.address,
-            city: props.city,
-            stateN: props.stateN,
-            zip: props.zip,
+            name: '',
+            address:'',
+            city:'',
+            stateN:'',
+            zip:'',
             mortgage: 0,
             rent: 0,
             
@@ -24,6 +24,17 @@ class StepThree extends Component {
         }
 
       this.createHouse = this.createHouse.bind(this)  
+    }
+    componentDidMount() {
+        const { name, address, city, stateN, zip } = this.props
+        this.setState({
+            name,
+            address,
+            city,
+            stateN,
+            zip
+
+        })
     }
     
     createHouse() {
