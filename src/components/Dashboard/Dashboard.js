@@ -10,36 +10,43 @@ class Dashboard extends Component{
             houses: []
         }
 
-        this.getAllHouses = this.getAllHouses.bind(this)
+        // this.getAllHouses = this.getAllHouses.bind(this)
     }
     
-    getAllHouses(){
-        axios.get('/api/houses')
-            .then((res) => {
-                this.setState({houses: res.data})     
-            })
-    }
+    
+    
+    // getAllHouses(){
+    //     axios.get('/api/houses')
+    //         .then((res) => {
+    //             this.setState({houses: res.data})     
+    //     })
+    // }
     deleteHouse(id){
-        axios.delete(`/api/house/${id}`)
+         axios.delete(`/api/house/${id}`)
             .then((res) => {
-                console.log(res)
-            })
-
-        
+                console.log('res',res)
+                console.log('res.data',res.data)
+        })
+                          
     }
     componentDidMount() {
-        this.getAllHouses()
+        axios.get('/api/houses')
+             .then((res) => {
+                 this.setState({houses: res.data})  
+                 console.log('Res Data', res.data)   
+         })
+         
     }
     
     render(){
-    console.log('massive get',this.state.houses)
+    console.log('Dash STATE',this.state)
 
         const { houses } = this.state;
-        const housesList = houses.map((house, index) => {
+        const housesList = houses.map((house) => {
             return (
 
                 <div>
-                    <House key={index} name={house.name} address={house.address} city={house.city} state={house.state} zip={house.zip} img={house.img} mortgage={house.mortgage} rent={house.rent} id={house.house_id} deleteHouseFN={this.deleteHouse} />
+                    <House key={house.house_id} name={house.name} address={house.address} stateN={house.staten} city={house.city} zip={house.zip} img={house.img} mortgage={house.mortgage} rent={house.rent} id={house.house_id} deleteHouseFN={this.deleteHouse} />
                 </div>
 
             )
@@ -47,9 +54,10 @@ class Dashboard extends Component{
     
     return(
             <div>
-                {this.getAllHouses}
+                
                 Dashboard
-                <Link to='/wizard/step1'><button>Add New Property</button></Link>
+                <Link to='/wizard/step1'><button>Add New Property</button></Link><br/>
+                House Listings
                 {housesList}
             </div>
 

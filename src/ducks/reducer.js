@@ -4,9 +4,9 @@ const initialState = {
     address:'',
     city:'',
     stateN:'',
-    zip:0,
+    zip:'',
     img:'',
-    mortgage:0.00,
+    mortgage: 0.00,
     rent: 0.00
 
 }
@@ -19,13 +19,15 @@ const UPDATE_ZIP = 'UPDATE_ZIP'
 const UPDATE_IMG = 'UPDATE_IMG'
 const UPDATE_MORTGAGE = 'UPDATE_MORTGAGE'
 const UPDATE_RENT = 'UPDATE_RENT'
-const UPDATE_EVERYTHING = 'UPDATE_EVERYTHING'
+const CLEAR_STATE = 'CLEAR_STATE'
+
+
 
 
 function reducer(state = initialState, action) {
     switch (action.type) {
         case UPDATE_NAME:
-            return Object.assign({}, state, { name: action.payload })
+            return Object.assign({}, state, { name: action.payload }) 
         case UPDATE_ADDRESS:
             return Object.assign({}, state, { address: action.payload })
         case UPDATE_CITY:
@@ -40,11 +42,9 @@ function reducer(state = initialState, action) {
             return Object.assign({}, state, { mortgage: action.payload });
         case UPDATE_RENT:
             return Object.assign({}, state, { rent: action.payload });
-        case UPDATE_EVERYTHING:
+        case CLEAR_STATE:
             return Object.assign({}, state, action.payload);
-
-
-
+        
 
         default: return state
     }
@@ -86,12 +86,6 @@ export function updateImg(img) {
         payload: img
     }
 }
-export function updateEverything(everything) {
-    return {
-        type: UPDATE_EVERYTHING,
-        payload: everything
-    }
-}
 export function updateMortgage(mortgage) {
     return {
         type: UPDATE_MORTGAGE,
@@ -104,6 +98,15 @@ export function updateRent(rent) {
         payload: rent
     }
 }
+export function clearState() {
+    
+    return {
+        type: CLEAR_STATE,
+        payload: initialState
+    }
+}
+
+
 
 
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {HashRouter} from 'react-router-dom'
 import routes from './routes'
@@ -14,12 +13,12 @@ class App extends Component {
     <Provider store={store}>
     
       <HashRouter>
-        <div>
-                <nav>
+        <div className='App'>
+                <nav className='App-header'>
                   <Header/>
                 </nav>
           
-                <div >
+                <div className='routes' > 
                   {routes}
                 </div>
 

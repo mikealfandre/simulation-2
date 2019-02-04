@@ -8,8 +8,8 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #519872;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,4 +29,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+.routes{
+  height: 100%;
+  margin-left: 15%;
+  margin-right: 15%;
+  background-color: aquamarine;
 }

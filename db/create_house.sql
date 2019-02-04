@@ -16,4 +16,4 @@ insert into houses(
     $6,
     $7,
     $8
-);
+); 

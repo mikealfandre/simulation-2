@@ -9,11 +9,16 @@ class StepTwo extends Component {
     constructor() {
         super()
         this.state = {
-            img: '',
-            
-
+           
+            img: ''
         }
         
+    }
+    componentDidMount(){
+        const {img} = this.props
+        this.setState({
+            img
+        })
     }
 
     handleChange(field, value) {
@@ -38,15 +43,15 @@ class StepTwo extends Component {
                 </div>
                 <nav>
                     <div>
-                        <Link to='/wizard/step1'><button>Previous Step</button></Link>
-                        <Link to='/wizard/step3'><button onClick={(e) => this.props.updateImg(e.target.value)}>Next Step</button></Link>
+                        <Link to='/wizard/step1'><button onClick={() => this.props.updateImg(this.state.img)}>Previous Step</button></Link>
+                        <Link to='/wizard/step3'><button onClick={() => this.props.updateImg(this.state.img)}>Next Step</button></Link>
                     </div>
                 </nav>
 
 
 
 
-            </div>
+            </div> 
         )
     }
 }

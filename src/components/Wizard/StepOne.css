@@ -1,0 +1,16 @@
+.step1-container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+}
+.button{
+    position: relative;
+    left: 25%;
+    top: 125px;
+    height: 30px;
+    width: 100px;
+}
+.input-box{
+    margin-top: 5%;
+}

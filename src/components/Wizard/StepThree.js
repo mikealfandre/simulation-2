@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { Redirect } from 'react-router'
 import { connect } from 'react-redux'
-import { updateMortgage } from '../../ducks/reducer'
-import { updateRent } from '../../ducks/reducer'
+import {updateMortgage} from '../../ducks/reducer'
+import {updateRent} from '../../ducks/reducer'
+import {clearState} from '../../ducks/reducer'
+
 
 class StepThree extends Component {
     constructor(props) {
@@ -16,8 +18,9 @@ class StepThree extends Component {
             city:'',
             stateN:'',
             zip:'',
-            mortgage: 0,
-            rent: 0,
+            img:'',
+            mortgage: 0.00,
+            rent: 0.00,
             
             redirect: false
 
@@ -26,23 +29,30 @@ class StepThree extends Component {
       this.createHouse = this.createHouse.bind(this)  
     }
     componentDidMount() {
-        const { name, address, city, stateN, zip } = this.props
+        const { name, address, city, stateN, zip, img, mortgage, rent } = this.props
         this.setState({
             name,
             address,
             city,
             stateN,
-            zip
+            zip,
+            img,
+            mortgage,
+            rent
 
         })
     }
     
     createHouse() {
         const { mortgage, rent} = this.state
-        const { name, address, city, stateN, zip, img} = this.props
+        const { name, address, city, stateN, zip, img, clearState} = this.props
 
         axios.post('/api/createhouse', { name, address, city, stateN, zip, img, mortgage, rent })
-            .then(() => this.setState({ redirect: true }))
+            .then(() => {clearState(); this.setState({ redirect: true }) } )
+
+        console.log('before clear state', this.props)
+        clearState()    
+        console.log('after clear state', this.props)
 
 
     }
@@ -52,18 +62,13 @@ class StepThree extends Component {
     }
 
 
-
-
-
-
     render() {
-        console.log('current state', this.state)
+        
         const { redirect } = this.state
         if (redirect) {
             return <Redirect to='/' />
-
-        
         }
+        
         return (
             <div>
                 Wizard Step 3 
@@ -76,7 +81,7 @@ class StepThree extends Component {
                 </div>
                 <nav>
                     <div>
-                        <Link to='/wizard/step2'><button onClick={(e) => { this.props.updateMortgage(e.target.value); this.props.updateRent(e.target.value);}}>Previous Step</button></Link>
+                        <Link to='/wizard/step2'><button onClick={() => {this.props.updateMortgage(this.state.mortgage); this.props.updateRent(this.state.rent)}}>Previous Step</button></Link>
                         <button onClick={this.createHouse}>Complete</button>
                     </div>
                 </nav>
@@ -90,7 +95,7 @@ class StepThree extends Component {
 
 
 function mapStatetoProps(state) {
-    const { name, address, city, stateN, zip, img  } = state
+    const { name, address, city, stateN, zip, img, mortgage, rent  } = state
     return {
         name,
         address,
@@ -98,11 +103,13 @@ function mapStatetoProps(state) {
         stateN,
         zip,
         img,
+        mortgage,
+        rent
         
     }
 }
 
-export default connect(mapStatetoProps, {updateMortgage, updateRent})(StepThree);
+export default connect(mapStatetoProps, {updateMortgage, updateRent, clearState})(StepThree);
 
 
 

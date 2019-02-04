@@ -21,7 +21,7 @@ module.exports = {
 
         db.create_house([name, address, city, stateN, zip, img, mortgage, rent])
             .then(() => res.status(200).send())
-            .catch((err) => res.status(500).send(err))
+            .catch((err) => res.status(500).send(err)) 
     }
 
     
